@@ -1,3 +1,10 @@
 /* 
     General Styles
 */
+.container{
+    background: ;
+}
+.button{
+    background: white;
+    border: solid 1px black;
+}
