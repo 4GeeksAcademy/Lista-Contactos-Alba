@@ -1,28 +1,91 @@
+import { name } from "file-loader";
+import { stringify } from "query-string";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: [],
+			contact: []	
+				
+			
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+
+			userCreate: async () =>{
+				try {
+					const user = await fetch ('https://playground.4geeks.com/contact/agendas/Alba',{
+						method:"POST", 
+						headers: {
+							"accept": "application/json"
+						},
+						
+					})
+					const data = await user.json()
+					setStore({contacts:data.contacts})
+						console.log(data)
+				} catch (error) {
+					console.log(error)
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			createContact : async () => {
+				const datos = {
+					name : '',
+					phone : '',
+					email : '',
+					address : ''
+				}
+				try {
+				const response = await fetch ('https://playground.4geeks.com/contact/agendas/Alba/contacts',{
+					method: "POST",
+					headers:{
+						"accept": "application/json",
+						"Content-Type": "application/json"
+					},
+
+				})
+				body:JSON.stringify(datos)
+				const data = await response.json()
+				setStore({contact:data.contact})	
+				} catch (error) {
+					console.log(error)
+				}
+			},
+			getAgenda : async () =>{
+				try {
+					const response = await fetch('https://playground.4geeks.com/contact/agendas/Alba',{
+						method: GET,
+						headers:{
+							"accept": "application/json"
+						}
+					})
+					const data = await response.json()
+					setStore({contacts:data.contacts})
+					
+					
+				} catch (error) {
+					console.log(error)
+					if(error === 404){
+						createContact()
+					}
+				}
+			}
+
+			// Use getActions to call a function within a fuction
+			
+			
+			// exampleFunction: () => {
+				// 	getActions().changeColor(0, "green");
+				// },
+				
+				
+
+				
+
+				
+					
+					/**
+					 fetch().then().then(data => setStore({ "foo": data.bar }))
+					 */
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -39,7 +102,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			}
 		}
+	
 	};
-};
+
+
 
 export default getState;
