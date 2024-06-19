@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
+
 import { Context } from "../store/appContext";
 
 import "../../styles/demo.css";
@@ -9,14 +10,19 @@ import "../../styles/demo.css";
 //formulario para crear o actualizar contactos
 
 export const AddContact = () => {
+    
     const {store, actions} = useContext(Context);
-    const [contacts, setContacts] = useState(
+    const [name, setName] = useState ('');
+    const [address, setAddress] = useState ('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const contacts=
         {
-        name: "",
-        address: "",
-        phone: "",
-        mail:""
-    });
+        name: name,
+        address: address,
+        phone: phone,
+        email:email
+    };
 
 
    
@@ -33,12 +39,12 @@ export const AddContact = () => {
                     <h6>Full Name</h6>
                     <label htmlFor="exampleInputEmail1" className="htmlForm-label"></label>
                     <input 
-                    onChange={(e) => setContacts(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     type="text"
                     name="name" 
                     className="w-100 htmlForm-control" 
                     id="exampleInputEmail1" aria-describedby="emailHelp" 
-                    value={contacts.name}
+                    value={name}
                     placeholder="Full Name" />
                 
 
@@ -47,26 +53,26 @@ export const AddContact = () => {
                     <h6>Email</h6>
                     <label htmlFor="exampleInputPassword1" className="htmlForm-label"></label>
                     <input 
-                    onChange={store.contact.email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     name="email" 
                     className="w-100 htmlForm-control" 
                     id="exampleInputPassword1" 
                     aria-describedby="emailHelp"
-                    value={name.mail} 
+                    value={email} 
                     placeholder="Enter email" />
                 </div>
                 <div className="mb-3">
                     <h6>Phone</h6>
                     <label htmlFor="exampleInputEmail1" className="htmlForm-label"></label>
                     <input 
-                    onChange={store.contact.phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     type="text" 
                     name="phone"
                     className="w-100 htmlForm-control" 
                     id="exampleInputEmail1" 
                     aria-describedby="emailHelp" 
-                    value={name.phone}
+                    value={phone}
                     placeholder="Entre phone" />
 
                 </div>
@@ -74,21 +80,20 @@ export const AddContact = () => {
                     <h6>Address</h6>
                     <label htmlFor="exampleInputPassword1" className="htmlForm-label"></label>
                     <input
-                    onChange={store.contact.address}
+                    onChange={(e) => setAddress(e.target.value)}
                     type="text"
                     name="address" 
                     className="w-100 htmlForm-control" 
                     id="exampleInputPassword1" 
-                    value={name.address}
+                    value={address}
                     placeholder="Enter address" />
                 </div>
-                {contacts.map(contact =>{
-                     return  <button type="submit" className="btn btn-outline-info w-100 lg" onClick={contact}>Submit</button> 
-                                })}
+                <button className="btn btn-primary" onClick={(e) => createContact}></button>
+                
             </div>
 
-            //link para volver a agenda (contact)
-            <Link to="/Contact">
+            
+            <Link to="/contact">
                 <span className="mb-2">Or get back to contacts </span>
             </Link> 
         </htmlForm>

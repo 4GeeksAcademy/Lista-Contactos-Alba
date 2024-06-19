@@ -32,5 +32,11 @@ module.exports = merge(common, {
           webSocketURL: publicUrl
         },
     },
+    resolve:{
+      fallback:{
+        "path":
+        require.resolve("path-browserify")
+      }
+    },
     plugins: []
 });

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 
 //muestra solo un contacto
 
-export const ContactCard = () => {
+export const ContactCard = ({name,address,phone,email}) => {
 
     const [editContacts, setEditContacts] = useState('');
 
@@ -20,10 +21,10 @@ export const ContactCard = () => {
                     </div>
                     <div className="col d-flex">
                         <div className="card-body">
-                            <h6 className="name"><i className="fa-solid fa-location-dot">a</i></h6>
-                            <p className="location"><i className="fa-solid fa-location-dot">a</i></p>  
-                            <p className="phonet"><i className="fa-solid fa-phone"></i>b</p>
-                            <p className="mail"><i className="fa-solid fa-envelope"></i>c</p>
+                            <h6 className="name"><i className="fa-solid fa-location-dot">{name}</i></h6>
+                            <p className="location"><i className="fa-solid fa-location-dot">{address}</i></p>  
+                            <p className="phonet"><i className="fa-solid fa-phone"></i>{phone}</p>
+                            <p className="mail"><i className="fa-solid fa-envelope"></i>{email}</p>
                         </div>
                         <div className="col">
                             <div className="card-body">

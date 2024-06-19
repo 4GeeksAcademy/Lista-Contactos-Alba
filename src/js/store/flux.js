@@ -68,14 +68,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						createContact()
 					}
 				}
-			}
+			},
 
 			// Use getActions to call a function within a fuction
 			
 			
-			// exampleFunction: () => {
-				// 	getActions().changeColor(0, "green");
-				// },
+			exampleFunction: () => {
+					getActions().createContact();
+				},
 				
 				
 
