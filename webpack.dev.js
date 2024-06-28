@@ -37,6 +37,6 @@ module.exports = merge(common, {
         "path":
         require.resolve("path-browserify")
       }
-    },
+    }, 
     plugins: []
 });

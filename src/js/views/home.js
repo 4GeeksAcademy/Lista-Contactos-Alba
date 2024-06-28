@@ -3,7 +3,7 @@ import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { AddContact } from "./addContacts";
 import { Contact } from "./contact";
-
+import { Link } from "react-router-dom";
 
 export const Home = () => (
 	
@@ -11,7 +11,7 @@ export const Home = () => (
 
 		<div className="ml-auto">welcome to contacts
 
-			<link to = "/contact">
+			 <link to = "/contact">
 				<button className="btn btn-primary"></button>
 			</link>
 		</div>
@@ -20,7 +20,7 @@ export const Home = () => (
 
 			<link to = "/addContact">
 				<button className="btn btn-primary"></button>
-			</link>
+			</link> 
 		</div>
 
 	</div>

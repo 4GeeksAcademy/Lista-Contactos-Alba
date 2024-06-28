@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Contact } from "./contact";
-
 
 import { Context } from "../store/appContext";
 
@@ -10,7 +8,7 @@ import "../../styles/demo.css";
 
 //formulario para crear o actualizar contactos
 
-export const AddContact = () => {
+ const AddContact = () => {
     
     const {store, actions} = useContext(Context);
     const [name, setName] = useState ('');
@@ -94,9 +92,10 @@ export const AddContact = () => {
             </div>
 
             
-            <Link to="/contact">
+            {/* <Link to="/contact">
                 <span className="mb-2">Or get back to contacts </span>
-            </Link> 
+            </Link>  */}
         </htmlForm>
     )
 };
+export default AddContact
