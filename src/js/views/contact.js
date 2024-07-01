@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { ContactCard } from "../component/ContactCard";
 import { Context } from "../store/appContext";
@@ -9,17 +9,24 @@ import { Context } from "../store/appContext";
 
 
 export const Contact = () => {
+    const { store, actions } = useContext(Context);
+    console.log(store.contacts)
+    useEffect(()=>{
+        actions.getAgenda()
+    },[])
+    console.log(store.contacts)
     return (
         
         <div>
-            <Link to="/addContact">
+            <Link to="/addcontact">
                 <button className="mb-2">Add new contact </button>
-            </Link>  
-           {store.Contacts.map ((contact) =>(
+            </Link> 
+            
+            {store.contacts.map ((contact) =>(
 
             <ContactCard  name={contact.name} address={contact.address} phone={contact.phone} email={contact.email}/>
            ))}
-            
+             
        </div> 
         
     )

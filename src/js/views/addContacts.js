@@ -4,32 +4,28 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 import "../../styles/demo.css";
+import { element } from "prop-types";
 
 
 //formulario para crear o actualizar contactos
 
- const AddContact = () => {
+ export const AddContact = () => {
     
     const {store, actions} = useContext(Context);
     const [name, setName] = useState ('');
     const [address, setAddress] = useState ('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const contacts=
-        {
-        name: name,
-        address: address,
-        phone: phone,
-        email:email
-    };
-
-
-   
+    const contacts= []
     
+   const handleSubmit = (e) => {
+    e.preventDefault()
+    actions.createContact(name,phone,email,address)
+    }
 
     return (
-        <htmlForm
-        onSubmit={actions.createContact}
+        <form
+        onSubmit={(e)=>{handleSubmit(e)}}
         >
                 
             <div className="container">
@@ -87,15 +83,14 @@ import "../../styles/demo.css";
                     value={address}
                     placeholder="Enter address" />
                 </div>
-                <button className="btn btn-primary" onClick={(e) => createContact}></button>
+                <button className="btn btn-primary" type="submit">confirmar</button>
                 
             </div>
 
             
-            {/* <Link to="/contact">
+            <Link to="/contact">
                 <span className="mb-2">Or get back to contacts </span>
-            </Link>  */}
-        </htmlForm>
+            </Link>  
+        </form>
     )
 };
-export default AddContact

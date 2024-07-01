@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contacts: [],
-			contact: []	
+			
 				
 			
 		},
@@ -27,12 +27,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
-			createContact : async () => {
+			createContact : async (name,phone,email,address) => {
 				const datos = {
-					name : '',
-					phone : '',
-					email : '',
-					address : ''
+					"name" : name,
+					"phone" : phone,
+					"email" : email,
+					"address" : address
 				}
 				try {
 				const response = await fetch ('https://playground.4geeks.com/contact/agendas/Alba/contacts',{
@@ -41,40 +41,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"accept": "application/json",
 						"Content-Type": "application/json"
 					},
+					body:JSON.stringify(datos)
 
 				})
-				body:JSON.stringify(datos)
 				const data = await response.json()
 				setStore({contact:data.contact})	
+				console.log("contacto creado")
 				} catch (error) {
 					console.log(error)
 				}
 			},
 			getAgenda : async () =>{
+				// const datos = {
+				// 	"slug": "",
+				// 	"contacts": []
+				//   }
 				try {
 					const response = await fetch('https://playground.4geeks.com/contact/agendas/Alba',{
 						method: GET,
 						headers:{
-							"accept": "application/json"
-						}
+							"accept": "application/json",
+							
+						},
+						// body:JSON.stringify(datos)
+						
 					})
 					const data = await response.json()
+					console.log(data, "data")
 					setStore({contacts:data.contacts})
 					
 					
 				} catch (error) {
-					console.log(error)
-					if(error === 404){
-						createContact()
-					}
+					console.log(error, "error")
+					
 				}
 			},
 
 			// Use getActions to call a function within a fuction
 			
 			
-			exampleFunction: () => {
+			function: () => {
 					getActions().createContact();
+					
 				},
 				
 				
