@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 
 //muestra solo un contacto
 
-export const ContactCard = ({name,address,phone,email}) => {
+export const ContactCard = ({name,address,phone,email,id}) => {
 
-    const [editContacts, setEditContacts] = useState('');
+    // const [editContacts, setEditContacts] = useState('');
 
-   
+   const editContacts = (e) =>{
+    e.preventDefault()
+    actions.editContactsPut()
+   }
     
 
     return (
@@ -25,12 +28,13 @@ export const ContactCard = ({name,address,phone,email}) => {
                             <p className="location"><i className="fa-solid fa-location-dot">{address}</i></p>  
                             <p className="phonet"><i className="fa-solid fa-phone"></i>{phone}</p>
                             <p className="mail"><i className="fa-solid fa-envelope"></i>{email}</p>
+                            <p className="id">{id}</p>
                         </div>
                         <div className="col">
                             <div className="card-body">
                                
                                 <div className="icons d-flex">
-                                    <i className="fa-solid fa-pencil btn-lg" onChange={''} ></i>
+                                    <i className="fa-solid fa-pencil btn-lg" onChange={(e)=>editContacts(e)} ></i>
                                     <i className="fa-solid fa-trash-can btn-lg" onClick={''} ></i>
                                 </div>
                             </div>

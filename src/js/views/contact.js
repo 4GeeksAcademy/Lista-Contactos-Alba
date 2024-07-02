@@ -9,6 +9,7 @@ import { Context } from "../store/appContext";
 
 
 export const Contact = () => {
+    
     const { store, actions } = useContext(Context);
     console.log(store.contacts)
     useEffect(()=>{
@@ -22,9 +23,9 @@ export const Contact = () => {
                 <button className="mb-2">Add new contact </button>
             </Link> 
             
-            {store.contacts.map ((contact) =>(
+            {store.contacts?.map ((contact) =>(
 
-            <ContactCard  name={contact.name} address={contact.address} phone={contact.phone} email={contact.email}/>
+            <ContactCard  name={contact.name} address={contact.address} phone={contact.phone} email={contact.email} id={contact.id}/>
            ))}
              
        </div> 

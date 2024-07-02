@@ -83,7 +83,7 @@ import { element } from "prop-types";
                     value={address}
                     placeholder="Enter address" />
                 </div>
-                <button className="btn btn-primary" type="submit">confirmar</button>
+                <button className="btn btn-primary" type="submit">Crear</button>
                 
             </div>
 
