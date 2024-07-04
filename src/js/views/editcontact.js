@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+
 
 import "../../styles/demo.css";
 import { element } from "prop-types";
@@ -9,18 +10,20 @@ import { element } from "prop-types";
 
 //formulario para crear o actualizar contactos
 
- export const AddContact = () => {
+ export const Edictcontact = () => {
+    const navigate = useNavigate();
     
     const {store, actions} = useContext(Context);
-    const [name, setName] = useState ('');
-    const [address, setAddress] = useState ('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    
-    
+  const [contact,setContact] = useState(store.contact)
+
+  console.log(store.contact);
    const handleSubmit = (e) => {
     e.preventDefault()
-    actions.createContact(name,phone,email,address)
+    actions.editContactsPut(contact,navigate)
+    }
+
+    const handleChange = (e) => {
+        setContact({...contact,[e.target.name]:e.target.value})
     }
 
     
@@ -30,21 +33,21 @@ import { element } from "prop-types";
 
     return (
         <form
-        onSubmit={(e)=>{handleSubmit(e)}}
+        onSubmit={handleSubmit}
         >
                 
             <div className="container">
-                <h1 className="d-flex justify-content-center">Add a new contact</h1>
+                <h1 className="d-flex justify-content-center">Edict contact</h1>
                 <div className="mb-3">
                     <h6>Full Name</h6>
                     <label htmlFor="exampleInputEmail1" className="htmlForm-label"></label>
                     <input 
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     type="text"
                     name="name" 
                     className="w-100 htmlForm-control" 
                     id="exampleInputEmail1" aria-describedby="emailHelp" 
-                    value={name}
+                    value={contact.name}
                     placeholder="Full Name" />
                 
 
@@ -53,26 +56,26 @@ import { element } from "prop-types";
                     <h6>Email</h6>
                     <label htmlFor="exampleInputPassword1" className="htmlForm-label"></label>
                     <input 
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     type="email"
                     name="email" 
                     className="w-100 htmlForm-control" 
                     id="exampleInputPassword1" 
                     aria-describedby="emailHelp"
-                    value={email} 
+                    value={contact.email} 
                     placeholder="Enter email" />
                 </div>
                 <div className="mb-3">
                     <h6>Phone</h6>
                     <label htmlFor="exampleInputEmail1" className="htmlForm-label"></label>
                     <input 
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     type="text" 
                     name="phone"
                     className="w-100 htmlForm-control" 
                     id="exampleInputEmail1" 
                     aria-describedby="emailHelp" 
-                    value={phone}
+                    value={contact.phone}
                     placeholder="Entre phone" />
 
                 </div>
@@ -80,15 +83,15 @@ import { element } from "prop-types";
                     <h6>Address</h6>
                     <label htmlFor="exampleInputPassword1" className="htmlForm-label"></label>
                     <input
-                    onChange={(e) => setAddress(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     type="text"
                     name="address" 
                     className="w-100 htmlForm-control" 
                     id="exampleInputPassword1" 
-                    value={address}
+                    value={contact.address}
                     placeholder="Enter address" />
                 </div>
-                <button className="btn btn-primary" type="submit">Crear</button>
+                <button className="btn btn-primary" type="submit">Editar</button>
                 
             </div>
 

@@ -5,12 +5,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contacts: [],
-			
+			contact:{}
 				
 			
 		},
 		actions: {
-
+			
 			userCreate: async () =>{
 				try {
 					const user = await fetch ('https://playground.4geeks.com/contact/agendas/Alba',{
@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"phone" : phone,
 					"email" : email,
 					"address" : address,
-					"id": id
+					
 				}
 				try {
 				const response = await fetch ('https://playground.4geeks.com/contact/agendas/Alba/contacts',{
@@ -74,29 +74,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 					
 				}
 			},
-			editContactsPut : async (name,phone,email,address,id) => {
-				const datos = {
-					"name": name,
-					"phone": phone,
-					"email": email,
-					"address": address,
-					"id": id
-				  }
+			editContactsPut : async (contact,navigate) => {
+				
 				try {
-					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Alba/contacts/${id}`,{
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Alba/contacts/${contact.id}`,{
 						method: "PUT",
 						headers:{
 							"accept": "application/json",
 							"Content-Type": "application/json"
 						}, 
-						body:JSON.stringify(datos)
+						body:JSON.stringify(contact)
 					})
 					const data = await response.json()
-					setStore({contact:data.contact})
+					// setStore({contact:data.contact})
+					navigate('/')
 					console.log("editar --> prueba");
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			deleteContacts : async(id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Alba/contacts/${id}`, {
+						method: "DELETE",
+						headers:{
+							"accept": "application/json",
+							
+						}, 
+					})
+					const data = await response.json()
+					setStore({contact:data.contact})
+					console.log("borrar --> prueba");
+				} catch (error) {
+					console.log(error, "error2");
+				}
+			},
+			salvarContacto : (name,phone,email,address,id) =>{
+				setStore({contact:{
+					name:name,
+					phone:phone,
+					email:email,
+					address:address,
+					id:id
+				}})
 			},
 
 			// Use getActions to call a function within a fuction
@@ -105,6 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			function: () => {
 					getActions().createContact();
 					getActions().editContactsPut();
+					getActions().deleteContacts();
 				},
 				
 				

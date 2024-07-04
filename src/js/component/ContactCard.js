@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 
 
 //muestra solo un contacto
 
 export const ContactCard = ({name,address,phone,email,id}) => {
+    console.log({name,phone,email,address,id})
+    const{store,actions} = useContext(Context);
+    const navigate = useNavigate();
 
-    // const [editContacts, setEditContacts] = useState('');
+   
 
-   const editContacts = (e) =>{
-    e.preventDefault()
+   const editContacts = () =>{
+    
     actions.editContactsPut()
+
+        navigate("/addcontact/");
+      
+   };
+
+   
+
+   const deleteContactos = () => {
+    actions.deleteContacts(id)
    }
     
 
@@ -28,14 +44,17 @@ export const ContactCard = ({name,address,phone,email,id}) => {
                             <p className="location"><i className="fa-solid fa-location-dot">{address}</i></p>  
                             <p className="phonet"><i className="fa-solid fa-phone"></i>{phone}</p>
                             <p className="mail"><i className="fa-solid fa-envelope"></i>{email}</p>
-                            <p className="id">{id}</p>
+                            
                         </div>
                         <div className="col">
                             <div className="card-body">
                                
                                 <div className="icons d-flex">
-                                    <i className="fa-solid fa-pencil btn-lg" onChange={(e)=>editContacts(e)} ></i>
-                                    <i className="fa-solid fa-trash-can btn-lg" onClick={''} ></i>
+                                     <i className="fa-solid fa-pencil btn-lg" onClick={()=>{
+                                        actions.salvarContacto(name,phone,email,address,id)
+                                        navigate('/editar_contact')
+                                     }} ></i>
+                                    {/* <i className="fa-solid fa-trash-can btn-lg" onClick={()=> {deleteContactos(id)}} ></i> */}
                                 </div>
                             </div>
                         </div>

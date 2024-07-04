@@ -25,7 +25,7 @@ export const Contact = () => {
             
             {store.contacts?.map ((contact) =>(
 
-            <ContactCard  name={contact.name} address={contact.address} phone={contact.phone} email={contact.email} id={contact.id}/>
+            <ContactCard  name={contact.name} address={contact.address} phone={contact.phone} email={contact.email} id={contact.id} />
            ))}
              
        </div> 
