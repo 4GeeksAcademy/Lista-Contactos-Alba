@@ -26,9 +26,7 @@ import { element } from "prop-types";
         setContact({...contact,[e.target.name]:e.target.value})
     }
 
-    
-    // const updatecontact = store.contacts.find((contact) => contact.id == params.id)
-   
+      
 
 
     return (

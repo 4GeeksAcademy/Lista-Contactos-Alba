@@ -86,16 +86,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body:JSON.stringify(contact)
 					})
 					const data = await response.json()
-					// setStore({contact:data.contact})
+					
 					navigate('/')
 					console.log("editar --> prueba");
 				} catch (error) {
 					console.log(error);
 				}
 			},
-			deleteContacts : async(id) => {
+			deleteContacts : async(contact) => {
 				try {
-					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Alba/contacts/${id}`, {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Alba/contacts/${contact.id}`, {
 						method: "DELETE",
 						headers:{
 							"accept": "application/json",
@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}, 
 					})
 					const data = await response.json()
-					setStore({contact:data.contact})
+					
 					console.log("borrar --> prueba");
 				} catch (error) {
 					console.log(error, "error2");

@@ -11,7 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 export const ContactCard = ({name,address,phone,email,id}) => {
     console.log({name,phone,email,address,id})
+
     const{store,actions} = useContext(Context);
+    const [contact,setContact] = useState(store.contact)
     const navigate = useNavigate();
 
    
@@ -27,7 +29,8 @@ export const ContactCard = ({name,address,phone,email,id}) => {
    
 
    const deleteContactos = () => {
-    actions.deleteContacts(id)
+    
+    actions.deleteContacts('Alba', contact.id)
    }
     
 
@@ -54,7 +57,7 @@ export const ContactCard = ({name,address,phone,email,id}) => {
                                         actions.salvarContacto(name,phone,email,address,id)
                                         navigate('/editar_contact')
                                      }} ></i>
-                                    {/* <i className="fa-solid fa-trash-can btn-lg" onClick={()=> {deleteContactos(id)}} ></i> */}
+                                    <i className="fa-solid fa-trash-can btn-lg" onClick={()=> {deleteContactos('Alba', contact.id)?contact:''}} ></i> 
                                 </div>
                             </div>
                         </div>
