@@ -20,7 +20,7 @@ export const Contact = () => {
         
         <div>
             <Link to="/addcontact">
-                <button className="mb-2">Add new contact </button>
+                <button className="btn btn-outline-warning mb-3 mt-5 ms-5">Add new contact </button>
             </Link> 
             
             {store.contacts?.map ((contact) =>(

@@ -7,7 +7,7 @@ import "../../styles/demo.css";
 import { element } from "prop-types";
 
 
-//formulario para crear o actualizar contactos
+//formulario para crear contactos
 
  export const AddContact = () => {
     
@@ -24,7 +24,6 @@ import { element } from "prop-types";
     }
 
     
-    // const updatecontact = store.contacts.find((contact) => contact.id == params.id)
    
 
 
@@ -33,7 +32,7 @@ import { element } from "prop-types";
         onSubmit={(e)=>{handleSubmit(e)}}
         >
                 
-            <div className="container">
+            <div className="container mt-5 ">
                 <h1 className="d-flex justify-content-center">Add a new contact</h1>
                 <div className="mb-3">
                     <h6>Full Name</h6>
@@ -88,13 +87,13 @@ import { element } from "prop-types";
                     value={address}
                     placeholder="Enter address" />
                 </div>
-                <button className="btn btn-primary" type="submit">Crear</button>
+                <button className="btn btn-outline-warning" type="submit">Crear</button>
                 
             </div>
 
             
             <Link to="/contact">
-                <span className="mb-2">Or get back to contacts </span>
+                <span className="mb-2 ms-3">Or get back to contacts </span>
             </Link>  
         </form>
     )
